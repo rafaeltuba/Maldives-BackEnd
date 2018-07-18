@@ -5,18 +5,16 @@ import java.util.ArrayList;
 public class Empresa {
 	
 	private String nmEmpresa;
-	private String cdRamoAtividade;
+	private Integer cdRamoAtividade;
 	private String deEmail;
 	private String deSenha;
 
-	public void setNmEmpresa(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setNmEmpresa(String nmEmpresa) {
+		this.nmEmpresa = nmEmpresa;
 	}
 
-	public void setCdRamoAtividade(int i) {
-		// TODO Auto-generated method stub
-		
+	public void setCdRamoAtividade(Integer cdRamoAtividade) {
+		this.cdRamoAtividade = cdRamoAtividade;
 	}
 
 	public void setCdMunicipio(int i) {
@@ -54,22 +52,17 @@ public class Empresa {
 		
 	}
 
-	public void setDeEmail(String string) {
-		// TODO Auto-generated method stub
+	public void setDeEmail(String deEmail) {
+		this.deEmail = deEmail;
 		
 	}
 
-	public void setDeSenha(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setDeSenha(String deSenha) {
+		this.deSenha = deSenha;
 	}
 
-	public String getCdRamoAtividade() {
+	public Integer getCdRamoAtividade() {
 		return cdRamoAtividade;
-	}
-
-	public void setCdRamoAtividade(String cdRamoAtividade) {
-		this.cdRamoAtividade = cdRamoAtividade;
 	}
 
 	public String getNmEmpresa() {
