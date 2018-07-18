@@ -16,7 +16,7 @@ public class EmpresaTest {
 		empresa.setDeSenha("123456");
 		
 		EmpresaService empresaService = new EmpresaService();
-		empresaService.registrarEmpresa(empresa);
+		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
 	
