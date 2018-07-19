@@ -22,7 +22,7 @@ public class SignUpTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void inscreverEmpresaSemAceitoDosTermos() {
+	public void inscreverEmpresaSemAceiteDosTermos() {
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");

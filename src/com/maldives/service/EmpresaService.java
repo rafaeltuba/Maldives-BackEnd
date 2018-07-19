@@ -21,6 +21,12 @@ public class EmpresaService {
 		if (empresa.getCdRamoAtividade() == null) {
 			throw new IllegalArgumentException("Ramo de atividade da empresa deve ser preenchido");
 		}
+		
+		this.save(empresa);
+	}
+
+	private void save(Empresa empresa) {
+		// TODO Auto-generated method stub
 	}
 
 
