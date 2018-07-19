@@ -7,11 +7,14 @@ import java.util.ResourceBundle;
 public class PacoteRecurso {
 	
 	public static String LOCALE_PORTUGUES_BRASIL = "pt-BR";
+	
 	private static PacoteRecurso pacoteRecurso = null;
-	private ResourceBundle resorceBundle = null;
+	private ResourceBundle resourceBundle = null;
+	private Locale locale = null;
 	
 	private PacoteRecurso() {
-		this.initializeResourceBundle();
+		locale = Locale.getDefault();
+		initializeResourceBundle();
 	}
 
 	public static PacoteRecurso getPacoteRecurso() {
@@ -21,37 +24,29 @@ public class PacoteRecurso {
 		return pacoteRecurso;
 	}
 	
+	public Locale getLocale() {
+		return this.locale;
+	}
+	
 	private void initializeResourceBundle() {
+		this.locale = Locale.getDefault();
 		
-		Locale defautLocale = Locale.getDefault();
 		Locale locale_pt_BR = new Locale(LOCALE_PORTUGUES_BRASIL);
 		
-		if (defautLocale.equals(locale_pt_BR)) {
-			resorceBundle =  ResourceBundle.getBundle("com.maldives.resources.bundle_pt_BR");
+		if (this.locale.equals(locale_pt_BR)) {
+			resourceBundle =  ResourceBundle.getBundle("com.maldives.resources.bundle_pt_BR");
 		} else {
-			throw new InternalError("Resource Bundle não foi identificado para lingua '" + defautLocale.getLanguage()+"_"+defautLocale.getCountry()+"'.");
+			throw new InternalError("Resource Bundle não foi identificado para lingua '" + this.locale.getLanguage()+"_"+this.locale.getCountry()+"'.");
 		}
-		
+	}
+	
+	public boolean isLocaleDiferente() {
+		return ! locale.equals(Locale.getDefault());
 	}
 	
 	public String getLabel(String key) {
-		return resorceBundle.getString(key);
+		if (isLocaleDiferente()) initializeResourceBundle();
+		return resourceBundle.getString(key);
 	}
-	
-	public void showAllLabels() {
-		Enumeration<String> bundleKeys = resorceBundle.getKeys();
-		while (bundleKeys.hasMoreElements()) {
-		    String bundleKey = (String)bundleKeys.nextElement();
-		    String value = resorceBundle.getString(bundleKey);
-		    System.out.println("key = " + bundleKey + ", " + "value = " + value);
-		}
-	}
-	
-	public static void main(String[] args) {
-		Locale.setDefault(new Locale(LOCALE_PORTUGUES_BRASIL));
-		PacoteRecurso.getPacoteRecurso().showAllLabels();
-		System.out.println(PacoteRecurso.getPacoteRecurso().getLabel("empresa.nmempresa.embranco"));
-	}
-	
 
 }

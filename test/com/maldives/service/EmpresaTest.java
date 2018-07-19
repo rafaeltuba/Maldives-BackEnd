@@ -5,14 +5,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.maldives.model.Empresa;
+import com.maldives.resources.PacoteRecurso;
 
-public class EmpresaTest {
+public class EmpresaTest extends com.maldives.service.Test {
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 
 	@Test
-	public void saveRegistrarEmpresaComSucesso() {
+	public void saveRegistrarEmpresaComSucessoTest() {
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");
@@ -26,10 +27,10 @@ public class EmpresaTest {
 	}
 	
 	@Test
-	public void saveRegistrarEmpresaSemNomePreenchido() {
+	public void saveRegistrarEmpresaSemNomePreenchidoTest() {
 		
 		exception.expect(IllegalArgumentException.class);
-	    exception.expectMessage("Nome da empresa está em branco.");
+	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.nome.empresa.embranco"));
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa(null);
@@ -43,10 +44,10 @@ public class EmpresaTest {
 	}
 	
 	@Test
-	public void saveRegistrarEmpresaSemRamoAtividadePreenchido() {
+	public void saveRegistrarEmpresaSemRamoAtividadePreenchidoTest() {
 		
 		exception.expect(IllegalArgumentException.class);
-	    exception.expectMessage("Ramo de atividade da empresa deve ser preenchido");
+	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.ramo.atividade.embranco"));
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");
@@ -63,7 +64,7 @@ public class EmpresaTest {
 	public void saveRegistrarEmpresaSemEmailPreenchido() {
 		
 		exception.expect(IllegalArgumentException.class);
-	    exception.expectMessage("E-mail da empresa deve ser preenchido");
+		exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.email.embranco"));
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");
@@ -80,7 +81,7 @@ public class EmpresaTest {
 	public void saveRegistrarEmpresaSemSenhaPreenchida() {
 		
 		exception.expect(IllegalArgumentException.class);
-	    exception.expectMessage("Senha da empresa deve ser preenchido");
+		exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.senha.embranco"));
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");
