@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <form method="post" id="registrarForm" name="registrarForm" action="http://localhost:8080/maldives/RegisterCompanyServlet">
+   
+   <table title="Registrar empresa" border="0">
+   	   <tr>
+   	      <td width="350" align="right"><b>Nome:</b></td>
+   	      <td width="300" align="left"><input id="nmEmpresa" name="nmEmpresa" size="50"/></td>
+   	      <td></td>
+   	   </tr>   	
+   	   <tr>
+   	      <td width="350" align="right"><b>Ramo de atividade:</b></td>
+   	      <td width="300" align="left">
+   	      	<select id="cdRamoAtividade" name="cdRamoAtividade">
+			  <option value="1">Marketing</option>
+			  <option value="2">IT</option>
+			  <option value="3">Farmácia</option>
+			  <option value="4">Outros</option>
+			</select>
+		  </td>
+   	      <td></td>
+   	   </tr>
+   	   <tr>
+   	      <td width="350" align="right"><b>E-mail:</b></td>
+   	      <td width="300" align="left"><input id="deEmail" name="deEmail" size="50" onchange="isValidEmail()"/></td>
+   	      <td></td>
+   	   </tr>
+   	   <tr>
+   	      <td width="350" align="right"><b>Senha:</b></td>
+   	      <td width="300" align="left"><input id="deSenha" name="deSenha" size="50"/></td>
+   	      <td></td>
+   	   </tr>
+   	   <tr>
+   	      <td width="350" align="right"></td>
+   	      <td width="300" align="right"><button type="submit" value="Registrar" class=""/>Registrar</button></td>
+   	      <td></td>
+   	   </tr>
+   </table>
+   </form>
+</body>
+<script type="text/javascript">
+
+	function isValidEmail() {
+		var email = document.getElementById("deEmail").value;
+		
+		if (!checkMail(email)) {
+			alert("O e-mail information é invalido: " + email);
+			document.getElementById("deEmail").value = "";
+		}
+	}
+
+	function checkMail(mail) {	
+		var er = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);	
+		if(typeof(mail) == "string"){		
+			if(er.test(mail)){ 
+				return true; 
+			}	
+		} else if (typeof(mail) == "object") {
+			if(er.test(mail.value)) {
+				return true;
+			}	
+		} else {
+			return false;		
+		}
+	}
+	 
+</script>
+</html>
