@@ -2,7 +2,7 @@ package com.maldives.service;
 
 import org.junit.Test;
 
-public class UsuarioTest {
+public class UsuarioTest extends com.maldives.service.Test {
 	
 	@Test
 	public void salvarUsuarioComSucesso() {
