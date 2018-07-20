@@ -45,7 +45,7 @@ public class RegistrarNovaEmpresaFlow {
   @Test
   public void fluxoCadastrarEmpresaInSucessoTest() {
 	
-	System.setProperty("webdriver.chrome.driver", "D:\\web-driver\\chromedriver_win32\\chromedriver.exe");	  
+	System.setProperty("webdriver.chrome.driver", "D:\\tools\\web-driver\\chromedriver_win32\\chromedriver.exe");	  
 	  
 	WebDriver driver = new ChromeDriver();
 	driver.get("http://localhost:8080/maldives/");
