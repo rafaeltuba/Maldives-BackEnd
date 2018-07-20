@@ -1,16 +1,25 @@
 package com.maldives.service;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.MockitoAnnotations;
 
 import com.maldives.model.Empresa;
 import com.maldives.resources.PacoteRecurso;
 
 public class EmpresaTest extends com.maldives.service.Test {
 	
+    private EmpresaService empresaService;
+	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test
 	public void saveRegistrarEmpresaComSucessoTest() {
@@ -19,9 +28,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha("123456");
 		
-		EmpresaService empresaService = new EmpresaService();
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -36,9 +43,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa(null);
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha("123456");
 		
-		EmpresaService empresaService = new EmpresaService();
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -53,9 +58,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(null);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha("123456");
 		
-		EmpresaService empresaService = new EmpresaService();
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -70,9 +73,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail(null);
-		empresa.setDeSenha("123456");
 		
-		EmpresaService empresaService = new EmpresaService();
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -87,11 +88,9 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha(null);
 		
-		EmpresaService empresaService = new EmpresaService();
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
-	
+
 }

@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 public class Empresa {
 	
+	private Integer idEmpresa;
 	private String nmEmpresa;
 	private Integer cdRamoAtividade;
 	private String deEmail;
-	private String deSenha;
+	
+	public Integer getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(Integer idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
 
 	public void setNmEmpresa(String nmEmpresa) {
 		this.nmEmpresa = nmEmpresa;
@@ -57,10 +65,6 @@ public class Empresa {
 		
 	}
 
-	public void setDeSenha(String deSenha) {
-		this.deSenha = deSenha;
-	}
-
 	public Integer getCdRamoAtividade() {
 		return cdRamoAtividade;
 	}
@@ -71,10 +75,6 @@ public class Empresa {
 
 	public String getDeEmail() {
 		return deEmail;
-	}
-
-	public String getDeSenha() {
-		return deSenha;
 	}
 
 }

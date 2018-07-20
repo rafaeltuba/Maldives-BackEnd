@@ -19,11 +19,10 @@ public class SignUpTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha("123456");
 		
 		Boolean flAceiteTermos = true;
 		
-		new SignUpService().inscreverEmpresa(empresa, flAceiteTermos);
+		new SignUpService().inscreverEmpresa(empresa, flAceiteTermos, "123");
 		
 	}
 	
@@ -37,11 +36,10 @@ public class SignUpTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresa.setDeSenha("123456");
 		
 		Boolean flAceiteTermos = false;
 		
-		new SignUpService().inscreverEmpresa(empresa, flAceiteTermos);
+		new SignUpService().inscreverEmpresa(empresa, flAceiteTermos, "123");
 	}
 	
 }

@@ -1,30 +1,43 @@
 package com.maldives.service;
 
+import java.sql.SQLException;
+
+import com.maldives.model.Empresa;
 import com.maldives.model.Usuario;
+import com.maldives.repository.UsuarioDB;
 
 public class UsuarioService {
-
+	
+	UsuarioDB usuarioDB = null;
+	
+	public UsuarioService() {
+		setUsuarioDB(new UsuarioDB());
+	}
+	
 	// é melhor passar o usuário como parâmetro ou como está agora?
-	public void saveUsuarioEmpresa(String deEmailId, String deSenha) {
+	public void saveUsuario(Empresa empresa, String senha) {
 		
-		if (deEmailId == null || "".equals(deEmailId)) { 
+		if (empresa.getDeEmail() == null || "".equals(empresa.getDeEmail())) { 
 			throw new IllegalArgumentException("E-mail do usuário deve ser preenchido");
 		}
 		
-		if (deSenha == null || "".equals(deSenha)) { 
+		if (senha == null || "".equals(senha)) { 
 			throw new IllegalArgumentException("Senha do usuário deve ser preenchida");
 		}
 		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId(deEmailId);
-		usuario.setDeSenha(deSenha);
-		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
+		if (empresa.getIdEmpresa() == null) { 
+			throw new IllegalArgumentException("Código identificador da empresa está nulo.");
+		}
 		
+		Usuario usuario = new Usuario();
+		usuario.setDeEmailId(empresa.getDeEmail());
+		usuario.setDeSenha(senha);
+		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
+		usuario.setIdEmpresa(empresa.getIdEmpresa());
 		this.save(usuario);		
 	}
 
 	private void save(Usuario usuario) {
-		
 		if (usuario.getDeSenha() == null || "".equals(usuario.getDeSenha())) { 
 			throw new IllegalArgumentException("E-mail do usuário deve ser preenchido");
 		}
@@ -32,9 +45,28 @@ public class UsuarioService {
 		if (usuario.getDeEmailId() == null || "".equals(usuario.getDeEmailId())) { 
 			throw new IllegalArgumentException("Senha do usuário deve ser preenchida");
 		}
+		
+		if (usuario.getIdEmpresa() == null) { 
+			throw new IllegalArgumentException("Código identificador da empresa está nulo.");
+		}
+		
+		try {
+			usuarioDB.save(usuario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	
-	
+	public void deleteAll() {
+		try {
+			usuarioDB.deleteAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setUsuarioDB(UsuarioDB usuarioDB) {
+		this.usuarioDB = usuarioDB;
+	}
 
 }
