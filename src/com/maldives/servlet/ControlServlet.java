@@ -33,15 +33,16 @@ public class ControlServlet extends HttpServlet {
     /**
      * Default constructor. 
      */
-	@Override
+
+  @Override
 	public void init(ServletConfig config) throws ServletException {
 	   super.init(config);
 	   WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
 	   this.empresaService = (EmpresaService)ctx.getBean("empresaServiceBean");
 	   this.signUpService	 = (SignUpService)ctx.getBean("signUpServiceBean");
 	   Locale.setDefault(new Locale(PacoteRecurso.LOCALE_PORTUGUES_BRASIL));
-	}	
-    
+  }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

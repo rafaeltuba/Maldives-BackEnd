@@ -3,16 +3,18 @@ package com.maldives.service;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import com.maldives.model.Empresa;
 import com.maldives.model.Usuario;
 import com.maldives.repository.UsuarioDB;
 import com.maldives.resources.PacoteRecurso;
-
 
 public class UsuarioService {
 	
 	@Autowired
 	private UsuarioDB usuarioDB;
+
+  public UsuarioService() {
+	}
 	
 	public boolean save(Usuario usuario) {
 		

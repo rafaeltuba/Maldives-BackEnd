@@ -36,13 +36,12 @@ public class RegistrarNovaEmpresaFlow {
     public void beforeExecution() {
 		EmpresaService empresaService = new EmpresaService();
 		empresaService.setEmpresaDB(new EmpresaDB());
-		
+		setEmpresaService(empresaService);
 		UsuarioService usuarioService = new UsuarioService();
 		usuarioService.setUsuarioDB(new UsuarioDB());
-		
 		setEmpresaService(new EmpresaService());
 		setUsuarioService(new UsuarioService());
-		
+		setUsuarioService(usuarioService);
 		usuarioService.deleteAll();
 		empresaService.deleteAll(); 
 	}
@@ -114,7 +113,7 @@ public class RegistrarNovaEmpresaFlow {
 	    
 		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 		
-	    assertEquals("HTTP Status 500 – Internal Server Error", driver.getTitle());
+	    assertEquals("HTTP Status 500 â€“ Internal Server Error", driver.getTitle());
 	    
 	    driver.quit();
 		  

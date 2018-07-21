@@ -7,7 +7,6 @@ import com.maldives.model.Empresa;
 import com.maldives.model.Usuario;
 import com.maldives.resources.PacoteRecurso;
 
-@Service
 public class SignUpService {
 	
 	@Autowired

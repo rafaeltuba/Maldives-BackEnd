@@ -9,7 +9,6 @@ import com.maldives.model.Empresa;
 import com.maldives.repository.EmpresaDB;
 import com.maldives.resources.PacoteRecurso;
 
-@Service
 public class EmpresaService {
 
 	@Autowired
