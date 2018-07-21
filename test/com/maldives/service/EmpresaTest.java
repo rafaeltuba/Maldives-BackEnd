@@ -1,40 +1,45 @@
 package com.maldives.service;
 
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.MockitoAnnotations;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.maldives.model.Empresa;
+import com.maldives.repository.EmpresaDB;
 import com.maldives.resources.PacoteRecurso;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 public class EmpresaTest extends com.maldives.service.Test {
 	
+	@InjectMocks
     private EmpresaService empresaService;
+	
+    @Mock
+    private EmpresaDB empresaDB;
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
-	public void saveRegistrarEmpresaComSucessoTest() {
+	public void registrarEmpresaComSucessoTest() {
 		
 		Empresa empresa = new Empresa();
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		
-		empresaService.registrarNovaEmpresa(empresa);
+		Mockito.when(empresaDB.save(empresa)).thenReturn(true);
+		assertEquals(empresaService.registrarNovaEmpresa(empresa), true);
 		
 	}
-	
 	@Test
-	public void saveRegistrarEmpresaSemNomePreenchidoTest() {
+	public void registrarEmpresaSemNomePreenchidoTest() {
 		
 		exception.expect(IllegalArgumentException.class);
 	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.nome.empresa.embranco"));
@@ -44,12 +49,13 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
+		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
 	
 	@Test
-	public void saveRegistrarEmpresaSemRamoAtividadePreenchidoTest() {
+	public void registrarEmpresaSemRamoAtividadePreenchidoTest() {
 		
 		exception.expect(IllegalArgumentException.class);
 	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.ramo.atividade.embranco"));
@@ -59,12 +65,13 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(null);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
+		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
 	
 	@Test
-	public void saveRegistrarEmpresaSemEmailPreenchido() {
+	public void registrarEmpresaSemEmailPreenchido() {
 		
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.email.embranco"));
@@ -74,23 +81,9 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail(null);
 		
+		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
 	
-	@Test
-	public void saveRegistrarEmpresaSemSenhaPreenchida() {
-		
-		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("empresa.senha.embranco"));
-		
-		Empresa empresa = new Empresa();
-		empresa.setNmEmpresa("Resultados Virtuais");
-		empresa.setCdRamoAtividade(1);
-		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		
-		empresaService.registrarNovaEmpresa(empresa);
-		
-	}
-
 }

@@ -3,16 +3,18 @@ package com.maldives.servlet;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.maldives.model.Empresa;
-import com.maldives.repository.EmpresaDB;
+import com.maldives.model.Usuario;
 import com.maldives.resources.PacoteRecurso;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.SignUpService;
@@ -24,8 +26,6 @@ import com.maldives.service.SignUpService;
 public class ControlServlet extends HttpServlet {
 	
 	private SignUpService signUpService;
-	
-	@Autowired
 	private EmpresaService empresaService;
 	
 	private static final long serialVersionUID = 1L;
@@ -33,12 +33,14 @@ public class ControlServlet extends HttpServlet {
     /**
      * Default constructor. 
      */
-	
-	@Autowired
-    public ControlServlet(SignUpService signUpService) {
-        Locale.setDefault(new Locale(PacoteRecurso.LOCALE_PORTUGUES_BRASIL));
-        this.signUpService = signUpService;
-    }
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+	   super.init(config);
+	   WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
+	   this.empresaService = (EmpresaService)ctx.getBean("empresaServiceBean");
+	   this.signUpService	 = (SignUpService)ctx.getBean("signUpServiceBean");
+	   Locale.setDefault(new Locale(PacoteRecurso.LOCALE_PORTUGUES_BRASIL));
+	}	
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +66,11 @@ public class ControlServlet extends HttpServlet {
 		empresa.setCdRamoAtividade(cdRamoAtividade);
 		empresa.setDeEmail(deEmail);
 		
-		signUpService.inscreverEmpresa(empresa, flAceiteTermos, deSenha);
+		Usuario usuario = new Usuario();
+		usuario.setDeEmailId(empresa.getDeEmail());
+		usuario.setDeSenha(deSenha);
+		
+		signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos);
 		
 		Empresa empresaSalva = empresaService.findByEmail(deEmail);
 		

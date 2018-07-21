@@ -34,7 +34,7 @@
   	<dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
     </dependency>
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
@@ -53,7 +53,9 @@
 	</dependency>
 	<dependency>
 	    <groupId>org.mockito</groupId>
-	    <version>2.0.2-beta</version>
+	    <artifactId>mockito-all</artifactId>
+	    <version>1.10.19</version>
+	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.springframework.boot</groupId>

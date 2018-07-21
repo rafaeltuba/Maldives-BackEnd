@@ -2,59 +2,33 @@ package com.maldives.service;
 
 import java.sql.SQLException;
 
-import com.maldives.model.Empresa;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.maldives.model.Usuario;
 import com.maldives.repository.UsuarioDB;
+import com.maldives.resources.PacoteRecurso;
+
 
 public class UsuarioService {
 	
-	UsuarioDB usuarioDB = null;
+	@Autowired
+	private UsuarioDB usuarioDB;
 	
-	public UsuarioService() {
-		setUsuarioDB(new UsuarioDB());
-	}
-	
-	// é melhor passar o usuário como parâmetro ou como está agora?
-	public void saveUsuario(Empresa empresa, String senha) {
+	public boolean save(Usuario usuario) {
 		
-		if (empresa.getDeEmail() == null || "".equals(empresa.getDeEmail())) { 
-			throw new IllegalArgumentException("E-mail do usuário deve ser preenchido");
-		}
-		
-		if (senha == null || "".equals(senha)) { 
-			throw new IllegalArgumentException("Senha do usuário deve ser preenchida");
-		}
-		
-		if (empresa.getIdEmpresa() == null) { 
-			throw new IllegalArgumentException("Código identificador da empresa está nulo.");
-		}
-		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId(empresa.getDeEmail());
-		usuario.setDeSenha(senha);
-		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
-		usuario.setIdEmpresa(empresa.getIdEmpresa());
-		this.save(usuario);		
-	}
-
-	private void save(Usuario usuario) {
 		if (usuario.getDeSenha() == null || "".equals(usuario.getDeSenha())) { 
-			throw new IllegalArgumentException("E-mail do usuário deve ser preenchido");
+			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.senha.embranco"));
 		}
 		
 		if (usuario.getDeEmailId() == null || "".equals(usuario.getDeEmailId())) { 
-			throw new IllegalArgumentException("Senha do usuário deve ser preenchida");
+			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.email.embranco"));
 		}
 		
 		if (usuario.getIdEmpresa() == null) { 
-			throw new IllegalArgumentException("Código identificador da empresa está nulo.");
+			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.id.empresa.embranco"));
 		}
 		
-		try {
-			usuarioDB.save(usuario);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		return usuarioDB.save(usuario);
 	}
 	
 	public void deleteAll() {

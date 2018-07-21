@@ -1,7 +1,5 @@
 package com.maldives.model;
 
-import java.util.ArrayList;
-
 public class Empresa {
 	
 	private Integer idEmpresa;
@@ -31,11 +29,6 @@ public class Empresa {
 	}
 
 	public void setAboutUs(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setEspecialidades(ArrayList arrayList) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -76,5 +69,5 @@ public class Empresa {
 	public String getDeEmail() {
 		return deEmail;
 	}
-
+	
 }

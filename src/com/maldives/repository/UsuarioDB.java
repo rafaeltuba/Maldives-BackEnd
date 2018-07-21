@@ -8,7 +8,7 @@ import com.maldives.model.Usuario;
 
 public class UsuarioDB {
 
-	public void save(Usuario usuario) throws SQLException {
+	public boolean save(Usuario usuario) {
 		
 		Connection connection = DBConnection.getConnection();
 		try {
@@ -18,8 +18,15 @@ public class UsuarioDB {
 			statement.setString(2, usuario.getDeEmailId());
 			statement.setInt(3, usuario.getIdEmpresa());
 			statement.execute();
+			return true;
+		} catch (Exception e) {
+			return false;
 		} finally {
-			connection.close();
+			try {
+				connection.close();	
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
