@@ -1,35 +1,34 @@
 package com.maldives.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.maldives.model.Empresa;
+import com.maldives.model.Usuario;
 import com.maldives.resources.PacoteRecurso;
 
 public class SignUpService {
 	
 	@Autowired
-	EmpresaService empresaService;
+	private EmpresaService empresaService;
 	
 	@Autowired
-	UsuarioService usuarioService;
+	private UsuarioService usuarioService;
 	
-	public SignUpService() {
-		this.setUsuarioService(new UsuarioService());
-	}
-
-	public void inscreverEmpresa(Empresa empresa, Boolean flAceiteTermos, String senha) {
+	public boolean registrarEmpresa(Empresa empresa, Usuario usuario, Boolean flAceiteTermos) {
+		
 		if (flAceiteTermos == null || flAceiteTermos == false) {
 			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("signup.termo.nao.marcado"));
 		}
-		empresaService.registrarNovaEmpresa(empresa);
+		boolean empresaSalva = empresaService.registrarNovaEmpresa(empresa);
+		
 		empresa = empresaService.findByEmail(empresa.getDeEmail());
-		usuarioService.saveUsuario(empresa, senha);
-	}
-
-	
-
-	public UsuarioService getUsuarioService() {
-		return usuarioService;
+		
+		usuario.setIdEmpresa(empresa.getIdEmpresa());
+		
+		boolean usuarioSalvo = usuarioService.save(usuario);
+		
+		return usuarioSalvo && empresaSalva;
 	}
 
 	public void setUsuarioService(UsuarioService usuarioService) {

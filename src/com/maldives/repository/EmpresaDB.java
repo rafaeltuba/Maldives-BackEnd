@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Configurable;
-
 import com.maldives.model.Empresa;
 
 public class EmpresaDB {
 	
-	public boolean save(Empresa empresa) throws SQLException {
+	public boolean save(Empresa empresa) {
 		
 		Connection connection = DBConnection.getConnection();
 		try {
@@ -26,7 +24,11 @@ public class EmpresaDB {
 			e.printStackTrace();
 			return false;
 		} finally {
-			connection.close();
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -74,15 +76,11 @@ public class EmpresaDB {
 	}
 	
 	public static void main(String[] args) {
-		try {
-			Empresa empresa = new Empresa();
-			empresa.setNmEmpresa("Resultados Virtuais");
-			empresa.setDeEmail("rafael@resultadosvirtuais.com");
-			empresa.setCdRamoAtividade(1);
-			new EmpresaDB().save(empresa);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Empresa empresa = new Empresa();
+		empresa.setNmEmpresa("Resultados Virtuais");
+		empresa.setDeEmail("rafael@resultadosvirtuais.com");
+		empresa.setCdRamoAtividade(1);
+		new EmpresaDB().save(empresa);
 	}
 	
 	/*public List<Expense> listAllExpenses() throws SQLException {
