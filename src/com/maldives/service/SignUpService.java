@@ -1,18 +1,16 @@
 package com.maldives.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.maldives.model.Empresa;
 import com.maldives.resources.PacoteRecurso;
 
-@Service
 public class SignUpService {
 	
 	@Autowired
 	EmpresaService empresaService;
 	
+	@Autowired
 	UsuarioService usuarioService;
 	
 	public SignUpService() {

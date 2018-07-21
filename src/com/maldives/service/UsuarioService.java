@@ -2,16 +2,18 @@ package com.maldives.service;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.maldives.model.Empresa;
 import com.maldives.model.Usuario;
 import com.maldives.repository.UsuarioDB;
 
 public class UsuarioService {
 	
-	UsuarioDB usuarioDB = null;
+	@Autowired
+	UsuarioDB usuarioDB;
 	
 	public UsuarioService() {
-		setUsuarioDB(new UsuarioDB());
 	}
 	
 	// é melhor passar o usuário como parâmetro ou como está agora?
