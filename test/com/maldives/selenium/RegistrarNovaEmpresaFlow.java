@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.maldives.repository.EmpresaDB;
+import com.maldives.repository.UsuarioDB;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.UsuarioService;
 
@@ -32,8 +34,14 @@ public class RegistrarNovaEmpresaFlow {
 	
 	@Before
     public void beforeExecution() {
-		//setEmpresaService(new EmpresaService());
-		setUsuarioService(new UsuarioService());
+		EmpresaService empresaService = new EmpresaService();
+		empresaService.setEmpresaDB(new EmpresaDB());
+		setEmpresaService(empresaService);
+		
+		UsuarioService usuarioService = new UsuarioService();
+		usuarioService.setUsuarioDB(new UsuarioDB());
+		
+		setUsuarioService(usuarioService);
 		usuarioService.deleteAll();
 		empresaService.deleteAll(); 
 	}

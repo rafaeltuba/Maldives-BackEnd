@@ -10,16 +10,10 @@ import com.maldives.model.Empresa;
 import com.maldives.repository.EmpresaDB;
 import com.maldives.resources.PacoteRecurso;
 
-@Service
 public class EmpresaService {
 
-	EmpresaDB empresaDB;
-	
 	@Autowired
-	public EmpresaService(EmpresaDB empresaDB) {
-		System.out.println("@Autowired empresaDB");
-		this.empresaDB = empresaDB;
-	}
+	EmpresaDB empresaDB;
 	
 	public EmpresaService() {
 	}
