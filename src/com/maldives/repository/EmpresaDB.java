@@ -1,42 +1,73 @@
 package com.maldives.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CompanyDB {
+import org.springframework.beans.factory.annotation.Configurable;
 
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost:3306/Maldives";
+import com.maldives.model.Empresa;
+
+public class EmpresaDB {
 	
-	//  Database credentials
-    static final String USER = "root";
-    static final String PASSWORD = "#Rafael01";
-    
-    private Connection getConnection() {
-    	Connection conn = null;
-        try {
-           Class.forName("com.mysql.jdbc.Driver");
-           conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-        } catch(SQLException se){
-           se.printStackTrace();
-        } catch(Exception e){
-           e.printStackTrace();
-        }
-		return conn;
-    }
-    
-    	
-	public void registerExpense() throws SQLException {
+	public boolean save(Empresa empresa) throws SQLException {
 		
-		Connection connection = this.getConnection();
+		Connection connection = DBConnection.getConnection();
 		try {
-			String insertSql = "insert into country (idcountry, nmcountry) values (?,?)";
+			String insertSql = "insert into empresa (nmEmpresa, deEmail, cdRamoAtividade) values (?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insertSql);
-			statement.setInt(1, 1);
-			statement.setString(2, "Brasil");
+			statement.setString(1, empresa.getNmEmpresa());
+			statement.setString(2, empresa.getDeEmail());
+			statement.setInt(3, empresa.getCdRamoAtividade());
 			statement.execute();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			connection.close();
+		}
+	}
+	
+	public Empresa findByEmail(final String email) {
+		Connection connection = DBConnection.getConnection();
+		Empresa empresaReturn = null;
+		try {
+			String selectSql = "select e.idEmpresa, e.deEmail, e.cdRamoAtividade, e.nmEmpresa from empresa e where e.deEmail = ?";
+			
+			PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+			selectStatement.setString(1, email);
+			ResultSet resultSet = selectStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				empresaReturn = new Empresa();
+				empresaReturn.setIdEmpresa(resultSet.getInt(1));
+				empresaReturn.setDeEmail(resultSet.getString(2));
+				empresaReturn.setCdRamoAtividade(resultSet.getInt(3));
+				empresaReturn.setNmEmpresa(resultSet.getString(4));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return empresaReturn;
+	}
+	
+	public void deleteAll() throws SQLException {
+		
+		Connection connection = DBConnection.getConnection();
+		try {
+			String sql = "delete from empresa";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.execute();
+			System.out.println(statement);
 		} finally {
 			connection.close();
 		}
@@ -44,7 +75,11 @@ public class CompanyDB {
 	
 	public static void main(String[] args) {
 		try {
-			new CompanyDB().registerExpense();
+			Empresa empresa = new Empresa();
+			empresa.setNmEmpresa("Resultados Virtuais");
+			empresa.setDeEmail("rafael@resultadosvirtuais.com");
+			empresa.setCdRamoAtividade(1);
+			new EmpresaDB().save(empresa);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

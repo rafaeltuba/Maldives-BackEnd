@@ -8,7 +8,14 @@ public class Usuario {
 	private String deEmailId;
 	private String deSenha;
 	private String tpUsuario;
+	private Integer idEmpresa;
 	
+	public Integer getIdEmpresa() {
+		return idEmpresa;
+	}
+	public void setIdEmpresa(Integer idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
 	public String getDeEmailId() {
 		return deEmailId;
 	}
