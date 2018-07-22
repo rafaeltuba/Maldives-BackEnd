@@ -34,7 +34,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		Mockito.when(empresaRepository.save(empresa)).thenReturn(true);
+		Mockito.when(empresaRepository.insert(empresa)).thenReturn(true);
 		assertEquals(empresaService.registrarNovaEmpresa(empresa), true);
 		
 	}
@@ -49,7 +49,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
-		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.insert(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -65,7 +65,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(null);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
-		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.insert(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -81,7 +81,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail(null);
 		
-		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.insert(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}

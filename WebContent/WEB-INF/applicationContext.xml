@@ -11,24 +11,52 @@
     <!-- Activates various annotations to be detected in bean classes -->
     <context:annotation-config/>
     
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	    <property name="url" value="jdbc:mysql://localhost:3306/maldives?characterEncoding=utf8" />
+	    <property name="username" value="root" />
+	    <property name="password" value="#Rafatuba01" />
+	</bean>
+	
+	<!-- bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="myDataSource"/>
+    </bean -->
 
-    <bean id="empresaServiceBean" class="com.maldives.service.EmpresaService"/>
-    <bean id="usuarioServiceBean" class="com.maldives.service.UsuarioService"/>
-    <bean id="signUpServiceBean" class="com.maldives.service.SignUpService"/>
-    <bean id="empresaRepositoryBean" class="com.maldives.repository.EmpresaRepository"/>
-    <bean id="usuarioRepositoryBean" class="com.maldives.repository.UsuarioRepository"/>
+    <bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
     
-    <bean id="empresaService" class="com.maldives.service.EmpresaService">
+    <bean id="empresaServiceBean" class="com.maldives.service.EmpresaService">
     	<property name="empresaRepository" ref="empresaRepositoryBean"/>
     </bean>
     
-    <bean id="usuarioService" class="com.maldives.service.UsuarioService">
+    <bean id="usuarioServiceBean" class="com.maldives.service.UsuarioService">
     	<property name="usuarioRepository" ref="usuarioRepositoryBean"/>
     </bean>
     
-    <bean id="signUpService" class="com.maldives.service.SignUpService">
+    <bean id="signUpServiceBean" class="com.maldives.service.SignUpService">
     	<property name="empresaService" ref="empresaServiceBean"/>
     	<property name="usuarioService" ref="usuarioServiceBean"/>
     </bean>
     
+    <bean id="empresaRepositoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="mapperInterface" value="com.maldives.repository.EmpresaRepository" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean> 
+    
+    <bean id="usuarioRepositoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="mapperInterface" value="com.maldives.repository.UsuarioRepository" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource"/>
+	  <property name="mapperLocations" value="classpath*:com.maldives.repository.mapping/**/*.xml" />
+	</bean>
+	
+	
 </beans>
