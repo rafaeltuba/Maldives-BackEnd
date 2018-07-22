@@ -3,16 +3,15 @@ package com.maldives.service;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.maldives.model.Empresa;
-import com.maldives.repository.EmpresaDB;
+import com.maldives.repository.EmpresaRepository;
 import com.maldives.resources.PacoteRecurso;
 
 public class EmpresaService {
 
 	@Autowired
-	private EmpresaDB empresaDB;
+	private EmpresaRepository empresaRepository;
 	
 	public boolean registrarNovaEmpresa(Empresa empresa) {
 		
@@ -31,23 +30,23 @@ public class EmpresaService {
 	}
 	
 	public Empresa findByEmail(final String email) {
-		return empresaDB.findByEmail(email);
+		return empresaRepository.findByEmail(email);
 	}
 	
 	public void deleteAll() {
 		try {
-			empresaDB.deleteAll();
+			empresaRepository.deleteAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private boolean save(Empresa empresa) {
-		return empresaDB.save(empresa);
+		return empresaRepository.save(empresa);
 	}
 
-	public void setEmpresaDB(EmpresaDB empresaDB) {
-		this.empresaDB = empresaDB;
+	public void setEmpresaRepository(EmpresaRepository empresaRepository) {
+		this.empresaRepository = empresaRepository;
 	}
 	
 }

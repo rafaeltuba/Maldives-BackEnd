@@ -2,11 +2,12 @@ package com.maldives.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.maldives.model.Usuario;
 
-public class UsuarioDB {
+public class UsuarioRepository {
 
 	public boolean save(Usuario usuario) {
 		
@@ -41,6 +42,36 @@ public class UsuarioDB {
 		} finally {
 			connection.close();
 		}
+	}
+
+	public Usuario findByEmail(String email) {
+		Connection connection = DBConnection.getConnection();
+		Usuario usuarioReturn = null;
+		try {
+			String selectSql = "select u.idEmpresa, u.deEmailId, u.deSenha, u.idUsuario from usuario u where u.deEmailId = ?";
+			PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+			selectStatement.setString(1, email);
+			
+			System.out.println(selectStatement);
+			ResultSet resultSet = selectStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				usuarioReturn = new Usuario();
+				usuarioReturn.setIdEmpresa(resultSet.getInt(1));
+				usuarioReturn.setDeEmailId(resultSet.getString(2));
+				usuarioReturn.setDeSenha(resultSet.getString(3));
+				usuarioReturn.setIdUsuario(resultSet.getInt(4));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return usuarioReturn;
 	}
 	
 }

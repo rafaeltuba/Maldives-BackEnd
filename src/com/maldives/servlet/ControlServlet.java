@@ -18,6 +18,7 @@ import com.maldives.model.Usuario;
 import com.maldives.resources.PacoteRecurso;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.SignUpService;
+import com.maldives.service.UsuarioService;
 
 /**
  * Servlet implementation class RegisterCompanyServlet
@@ -27,6 +28,7 @@ public class ControlServlet extends HttpServlet {
 	
 	private SignUpService signUpService;
 	private EmpresaService empresaService;
+	private UsuarioService usuarioService;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -40,6 +42,7 @@ public class ControlServlet extends HttpServlet {
 	   WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
 	   this.empresaService = (EmpresaService)ctx.getBean("empresaServiceBean");
 	   this.signUpService	 = (SignUpService)ctx.getBean("signUpServiceBean");
+	   this.usuarioService	 = (UsuarioService)ctx.getBean("usuarioServiceBean");
 	   Locale.setDefault(new Locale(PacoteRecurso.LOCALE_PORTUGUES_BRASIL));
   }
 
@@ -79,6 +82,13 @@ public class ControlServlet extends HttpServlet {
 		request.setAttribute("nmEmpresa", empresaSalva.getNmEmpresa());
 		request.setAttribute("deEmail", empresaSalva.getDeEmail());
 		request.setAttribute("cdRamoAtividade", empresa.getCdRamoAtividade());
+		
+		Usuario usuarioSalvo = usuarioService.findByEmail(deEmail);
+		
+		request.setAttribute("idUsuario", usuarioSalvo.getIdUsuario());
+		request.setAttribute("emailId", usuarioSalvo.getDeEmailId());
+		request.setAttribute("deSenha", usuarioSalvo.getDeSenha());
+		request.setAttribute("idEmpresaUsuario", usuario.getIdEmpresa());
 		
 		request.getRequestDispatcher("/WEB-INF/sucesso.jsp").forward(request, response);
 			

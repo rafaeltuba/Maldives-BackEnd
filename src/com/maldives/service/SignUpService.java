@@ -1,7 +1,6 @@
 package com.maldives.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.maldives.model.Empresa;
 import com.maldives.model.Usuario;

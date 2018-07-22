@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.maldives.model.Empresa;
 
-public class EmpresaDB {
+public class EmpresaRepository {
 	
 	public boolean save(Empresa empresa) {
 		
@@ -80,7 +80,7 @@ public class EmpresaDB {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setDeEmail("rafael@resultadosvirtuais.com");
 		empresa.setCdRamoAtividade(1);
-		new EmpresaDB().save(empresa);
+		new EmpresaRepository().save(empresa);
 	}
 	
 	/*public List<Expense> listAllExpenses() throws SQLException {
