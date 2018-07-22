@@ -11,7 +11,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	public boolean save(Usuario usuario) {
+	public boolean insert(Usuario usuario) {
 		
 		if (usuario.getDeSenha() == null || "".equals(usuario.getDeSenha())) { 
 			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.senha.embranco"));
@@ -28,20 +28,12 @@ public class UsuarioService {
 		return usuarioRepository.insert(usuario);
 	}
 	
-	public void deleteAll() {
-		/*try {
-			usuarioRepository.deleteAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}*/
-	}
-
-	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
-	}
-
 	public Usuario findByEmail(String deEmail) {
 		return usuarioRepository.findByEmail(deEmail);
+	}
+	
+	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
 	}
 
 }

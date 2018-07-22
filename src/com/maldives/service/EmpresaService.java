@@ -24,22 +24,14 @@ public class EmpresaService {
 		if (empresa.getCdRamoAtividade() == null) {
 			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("empresa.ramo.atividade.embranco"));
 		}
-		return this.save(empresa);
+		return this.insert(empresa);
 	}
 	
 	public Empresa findByEmail(final String email) {
 		return empresaRepository.findByEmail(email);
 	}
 	
-	public void deleteAll() {
-		/*try {
-			//empresaRepository.deleteAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}*/
-	}
-
-	private boolean save(Empresa empresa) {
+	private boolean insert(Empresa empresa) {
 		return empresaRepository.insert(empresa);
 	}
 

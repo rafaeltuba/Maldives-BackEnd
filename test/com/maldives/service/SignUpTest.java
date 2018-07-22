@@ -52,7 +52,7 @@ public class SignUpTest extends com.maldives.service.Test {
 		empresaReturn.setIdEmpresa(1);
 		
 		Mockito.when(empresaService.registrarNovaEmpresa(empresa)).thenReturn(true);
-		Mockito.when(usuarioService.save(usuario)).thenReturn(true);
+		Mockito.when(usuarioService.insert(usuario)).thenReturn(true);
 		Mockito.when(empresaService.findByEmail(empresa.getDeEmail())).thenReturn(empresaReturn);
 		
 		assertEquals(signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos), true);
@@ -83,7 +83,7 @@ public class SignUpTest extends com.maldives.service.Test {
 		empresaReturn.setIdEmpresa(1);
 		
 		Mockito.when(empresaService.registrarNovaEmpresa(empresa)).thenReturn(true);
-		Mockito.when(usuarioService.save(usuario)).thenReturn(true);
+		Mockito.when(usuarioService.insert(usuario)).thenReturn(true);
 		Mockito.when(empresaService.findByEmail(empresa.getDeEmail())).thenReturn(empresaReturn);
 		
 		signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos);

@@ -25,7 +25,7 @@ public class SignUpService {
 		
 		usuario.setIdEmpresa(empresa.getIdEmpresa());
 		
-		boolean usuarioSalvo = usuarioService.save(usuario);
+		boolean usuarioSalvo = usuarioService.insert(usuario);
 		
 		return usuarioSalvo && empresaSalva;
 	}
