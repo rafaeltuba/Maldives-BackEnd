@@ -2,6 +2,7 @@ package com.maldives.selenium;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
@@ -11,12 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.maldives.repository.EmpresaRepository;
-import com.maldives.repository.UsuarioRepository;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.UsuarioService;
 
-public class RegistrarNovaEmpresaFlow {
+public class RegistrarNovaEmpresaFlow extends UITest {
 	
 	private final String CHROMEDRIVER_PATH = "D:\\tools\\web-driver\\chromedriver_win32\\chromedriver.exe";
   
@@ -34,16 +33,13 @@ public class RegistrarNovaEmpresaFlow {
 	
 	@Before
     public void beforeExecution() {
-		EmpresaService empresaService = new EmpresaService();
-		empresaService.setEmpresaRepository(new EmpresaRepository());
-		setEmpresaService(empresaService);
-		UsuarioService usuarioService = new UsuarioService();
-		usuarioService.setUsuarioRepository(new UsuarioRepository());
-		setEmpresaService(new EmpresaService());
-		setUsuarioService(new UsuarioService());
-		setUsuarioService(usuarioService);
-		usuarioService.deleteAll();
-		empresaService.deleteAll(); 
+		try {
+			this.deleteAllUsuarios();
+			this.deleteAllEmpresas();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 
 	}
 	  
 	  @Test

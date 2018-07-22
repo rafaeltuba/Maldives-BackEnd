@@ -1,13 +1,16 @@
 package com.maldives.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.maldives.model.Usuario;
 
-public class UsuarioRepository {
+public interface UsuarioRepository {
+	
+	public boolean insert(Usuario usuario);
+	
+	public Usuario findByEmail(final String email);
+	
+	/*public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	public boolean save(Usuario usuario) {
 		
@@ -42,9 +45,9 @@ public class UsuarioRepository {
 		} finally {
 			connection.close();
 		}
-	}
+	}*/
 
-	public Usuario findByEmail(String email) {
+	/*public Usuario findByEmail(String email) {
 		Connection connection = DBConnection.getConnection();
 		Usuario usuarioReturn = null;
 		try {
@@ -72,6 +75,6 @@ public class UsuarioRepository {
 			}
 		}
 		return usuarioReturn;
-	}
+	}*/
 	
 }

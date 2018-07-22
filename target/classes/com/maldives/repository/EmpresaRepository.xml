@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Empresa">
+<mapper namespace="com.maldives.repository.EmpresaRepository">
 
  <resultMap id = "result" type = "com.maldives.model.Empresa">
    <result property = "idEmpresa" column = "IDEMPRESA"/>
@@ -14,8 +14,9 @@
 
   <insert id = "insert" parameterType = "com.maldives.model.Empresa">
   	  INSERT INTO EMPRESA (nmEmpresa, deEmail, cdRamoAtividade) VALUES (#{nmEmpresa},#{deEmail},#{cdRamoAtividade});
-      <!-- selectKey keyProperty = "id" resultType = "int" order = "AFTER">
-         select last_insert_id() as id
-      </selectKey -->   
    </insert>
+   
+   <select id="findByEmail" parameterType="String" resultType="com.maldives.model.Empresa">
+   		SELECT e.idEmpresa, e.deEmail, e.cdRamoAtividade, e.nmEmpresa from EMPRESA e WHERE e.deEmail = #{deEmail};
+   </select>
 </mapper>

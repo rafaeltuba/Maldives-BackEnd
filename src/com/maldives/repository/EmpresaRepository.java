@@ -1,15 +1,14 @@
 package com.maldives.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.maldives.model.Empresa;
 
-public class EmpresaRepository {
+public interface EmpresaRepository {
 	
-	public boolean save(Empresa empresa) {
+	public boolean insert(Empresa empresa);
+	 
+	public Empresa findByEmail(final String email);
+	
+	/*public boolean save(Empresa empresa) {
 		
 		Connection connection = DBConnection.getConnection();
 		try {
@@ -60,9 +59,9 @@ public class EmpresaRepository {
 			}
 		}
 		return empresaReturn;
-	}
+	}*/
 	
-	public void deleteAll() throws SQLException {
+	/*public void deleteAll() throws SQLException {
 		
 		Connection connection = DBConnection.getConnection();
 		try {
@@ -81,7 +80,7 @@ public class EmpresaRepository {
 		empresa.setDeEmail("rafael@resultadosvirtuais.com");
 		empresa.setCdRamoAtividade(1);
 		new EmpresaRepository().save(empresa);
-	}
+	}*/
 	
 	/*public List<Expense> listAllExpenses() throws SQLException {
 		

@@ -37,7 +37,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioRepository.save(usuario)).thenReturn(true);
+		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(true);
 		
 		assertEquals(usuarioService.save(usuario), true);
 	}
@@ -54,7 +54,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}
@@ -70,7 +70,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}
@@ -88,7 +88,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
 		
-		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}

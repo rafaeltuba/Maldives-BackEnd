@@ -1,7 +1,5 @@
 package com.maldives.service;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.maldives.model.Usuario;
@@ -27,15 +25,15 @@ public class UsuarioService {
 			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.id.empresa.embranco"));
 		}
 		
-		return usuarioRepository.save(usuario);
+		return usuarioRepository.insert(usuario);
 	}
 	
 	public void deleteAll() {
-		try {
+		/*try {
 			usuarioRepository.deleteAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {

@@ -1,7 +1,5 @@
 package com.maldives.service;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.maldives.model.Empresa;
@@ -34,15 +32,15 @@ public class EmpresaService {
 	}
 	
 	public void deleteAll() {
-		try {
-			empresaRepository.deleteAll();
+		/*try {
+			//empresaRepository.deleteAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	private boolean save(Empresa empresa) {
-		return empresaRepository.save(empresa);
+		return empresaRepository.insert(empresa);
 	}
 
 	public void setEmpresaRepository(EmpresaRepository empresaRepository) {
