@@ -12,14 +12,14 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.maldives.model.Usuario;
-import com.maldives.repository.UsuarioDB;
+import com.maldives.repository.UsuarioRepository;
 import com.maldives.resources.PacoteRecurso;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UsuarioTest extends com.maldives.service.Test {
 	
 	@Mock
-	private UsuarioDB usuarioDB;
+	private UsuarioRepository usuarioRepository;
 	
 	@InjectMocks
 	private UsuarioService usuarioService;
@@ -37,7 +37,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioDB.save(usuario)).thenReturn(true);
+		Mockito.when(usuarioRepository.save(usuario)).thenReturn(true);
 		
 		assertEquals(usuarioService.save(usuario), true);
 	}
@@ -54,7 +54,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioDB.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}
@@ -70,7 +70,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
 		usuario.setIdEmpresa(1);
 		
-		Mockito.when(usuarioDB.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}
@@ -88,7 +88,7 @@ public class UsuarioTest extends com.maldives.service.Test {
 		usuario.setDeSenha(senha);
 		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
 		
-		Mockito.when(usuarioDB.save(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.save(usuario)).thenReturn(false);
 		
 		usuarioService.save(usuario);
 	}

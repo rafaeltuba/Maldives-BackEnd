@@ -4,12 +4,20 @@ public class Usuario {
 	
 	public static final String TPUSUARIO_CANDIDATO = "C";
 	public static final String TPUSUARIO_EMPRESA = "E";
-	
+
+	private Integer idUsuario;
 	private String deEmailId;
 	private String deSenha;
 	private String tpUsuario;
 	private Integer idEmpresa;
 	
+	
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	public Integer getIdEmpresa() {
 		return idEmpresa;
 	}

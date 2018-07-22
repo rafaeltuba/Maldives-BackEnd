@@ -15,15 +15,15 @@
     <bean id="empresaServiceBean" class="com.maldives.service.EmpresaService"/>
     <bean id="usuarioServiceBean" class="com.maldives.service.UsuarioService"/>
     <bean id="signUpServiceBean" class="com.maldives.service.SignUpService"/>
-    <bean id="empresaDBBean" class="com.maldives.repository.EmpresaDB"/>
-    <bean id="usuarioDBBean" class="com.maldives.repository.UsuarioDB"/>
+    <bean id="empresaRepositoryBean" class="com.maldives.repository.EmpresaRepository"/>
+    <bean id="usuarioRepositoryBean" class="com.maldives.repository.UsuarioRepository"/>
     
     <bean id="empresaService" class="com.maldives.service.EmpresaService">
-    	<property name="empresaDB" ref="empresaDBBean"/>
+    	<property name="empresaRepository" ref="empresaRepositoryBean"/>
     </bean>
     
     <bean id="usuarioService" class="com.maldives.service.UsuarioService">
-    	<property name="usuarioDB" ref="usuarioDBBean"/>
+    	<property name="usuarioRepository" ref="usuarioRepositoryBean"/>
     </bean>
     
     <bean id="signUpService" class="com.maldives.service.SignUpService">

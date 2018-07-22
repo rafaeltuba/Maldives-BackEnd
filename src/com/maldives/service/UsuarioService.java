@@ -3,19 +3,16 @@ package com.maldives.service;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.maldives.model.Empresa;
+
 import com.maldives.model.Usuario;
-import com.maldives.repository.UsuarioDB;
+import com.maldives.repository.UsuarioRepository;
 import com.maldives.resources.PacoteRecurso;
 
 public class UsuarioService {
 	
 	@Autowired
-	private UsuarioDB usuarioDB;
+	private UsuarioRepository usuarioRepository;
 
-  public UsuarioService() {
-	}
-	
 	public boolean save(Usuario usuario) {
 		
 		if (usuario.getDeSenha() == null || "".equals(usuario.getDeSenha())) { 
@@ -30,19 +27,23 @@ public class UsuarioService {
 			throw new IllegalArgumentException(PacoteRecurso.getPacoteRecurso().getLabel("usuario.id.empresa.embranco"));
 		}
 		
-		return usuarioDB.save(usuario);
+		return usuarioRepository.save(usuario);
 	}
 	
 	public void deleteAll() {
 		try {
-			usuarioDB.deleteAll();
+			usuarioRepository.deleteAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void setUsuarioDB(UsuarioDB usuarioDB) {
-		this.usuarioDB = usuarioDB;
+	public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
+	}
+
+	public Usuario findByEmail(String deEmail) {
+		return usuarioRepository.findByEmail(deEmail);
 	}
 
 }

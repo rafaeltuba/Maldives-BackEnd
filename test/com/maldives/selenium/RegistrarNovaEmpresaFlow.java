@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.maldives.repository.EmpresaDB;
-import com.maldives.repository.UsuarioDB;
+import com.maldives.repository.EmpresaRepository;
+import com.maldives.repository.UsuarioRepository;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.UsuarioService;
 
@@ -35,10 +35,10 @@ public class RegistrarNovaEmpresaFlow {
 	@Before
     public void beforeExecution() {
 		EmpresaService empresaService = new EmpresaService();
-		empresaService.setEmpresaDB(new EmpresaDB());
+		empresaService.setEmpresaRepository(new EmpresaRepository());
 		setEmpresaService(empresaService);
 		UsuarioService usuarioService = new UsuarioService();
-		usuarioService.setUsuarioDB(new UsuarioDB());
+		usuarioService.setUsuarioRepository(new UsuarioRepository());
 		setEmpresaService(new EmpresaService());
 		setUsuarioService(new UsuarioService());
 		setUsuarioService(usuarioService);
@@ -77,13 +77,20 @@ public class RegistrarNovaEmpresaFlow {
 	    
 		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 		
-		WebElement body = driver.findElement(By.tagName("body"));
-		String bodyText = body.getText();
+		WebElement tdNmEmpresa = driver.findElement(By.id("tdNmEmpresa"));
+		WebElement tdCdRamoAtividade = driver.findElement(By.id("tdCdRamoAtividade"));
+		WebElement tdDeEmail = driver.findElement(By.id("tdDeEmail"));
+		
+		WebElement tdSenha = driver.findElement(By.id("tdDeSenha"));
+		WebElement tdEmailId = driver.findElement(By.id("tdEmailId"));
 		
 	    assertEquals("Conta criado com Sucesso!", driver.getTitle());
-	    assertEquals(bodyText.contains(nmEmpresa), true); 
-	    assertEquals(bodyText.contains(cdRamoAtividade), true);
-	    assertEquals(bodyText.contains(deEmail), true);
+	    assertEquals(tdNmEmpresa.getText().contains(nmEmpresa), true); 
+	    assertEquals(tdCdRamoAtividade.getText().contains(cdRamoAtividade), true);
+	    assertEquals(tdDeEmail.getText().contains(deEmail), true);
+	    
+	    assertEquals(tdSenha.getText().contains(deSenha), true);
+	    assertEquals(tdEmailId.getText().contains(deEmail), true);
 	    
 	    driver.quit();
 		  
@@ -113,7 +120,7 @@ public class RegistrarNovaEmpresaFlow {
 	    
 		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 		
-	    assertEquals("HTTP Status 500 â€“ Internal Server Error", driver.getTitle());
+	    assertEquals("HTTP Status 500 – Internal Server Error", driver.getTitle());
 	    
 	    driver.quit();
 		  

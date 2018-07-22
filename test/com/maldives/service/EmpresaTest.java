@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.maldives.model.Empresa;
-import com.maldives.repository.EmpresaDB;
+import com.maldives.repository.EmpresaRepository;
 import com.maldives.resources.PacoteRecurso;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,7 +22,7 @@ public class EmpresaTest extends com.maldives.service.Test {
     private EmpresaService empresaService;
 	
     @Mock
-    private EmpresaDB empresaDB;
+    private EmpresaRepository empresaRepository;
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
@@ -34,7 +34,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setNmEmpresa("Resultados Virtuais");
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
-		Mockito.when(empresaDB.save(empresa)).thenReturn(true);
+		Mockito.when(empresaRepository.save(empresa)).thenReturn(true);
 		assertEquals(empresaService.registrarNovaEmpresa(empresa), true);
 		
 	}
@@ -49,7 +49,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
-		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -65,7 +65,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(null);
 		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
 		
-		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
@@ -81,7 +81,7 @@ public class EmpresaTest extends com.maldives.service.Test {
 		empresa.setCdRamoAtividade(1);
 		empresa.setDeEmail(null);
 		
-		Mockito.when(empresaDB.save(empresa)).thenReturn(false);
+		Mockito.when(empresaRepository.save(empresa)).thenReturn(false);
 		empresaService.registrarNovaEmpresa(empresa);
 		
 	}
