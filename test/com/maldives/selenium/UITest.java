@@ -31,7 +31,7 @@ public abstract class UITest {
 		
 		Connection connection = getConnection();
 		try {
-			String sql = "delete from empresa";
+			String sql = "delete from company";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.execute();
 			System.out.println(statement);
@@ -44,7 +44,7 @@ public abstract class UITest {
 		
 		Connection connection = getConnection();
 		try {
-			String sql = "delete from usuario";
+			String sql = "delete from user";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.execute();
 			System.out.println(statement);

@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.maldives.model.Usuario;
+import com.maldives.domain.User;
 import com.maldives.repository.UsuarioRepository;
 import com.maldives.resources.PacoteRecurso;
 
@@ -32,14 +32,14 @@ public class UsuarioTest extends com.maldives.service.Test {
 		
 		String senha = "123";
 		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId("rafael@resultadosvirtuais.com");
-		usuario.setDeSenha(senha);
-		usuario.setIdEmpresa(1);
+		User user = new User();
+		user.setEmailId("rafael@resultadosvirtuais.com");
+		user.setPassword(senha);
+		user.setUserType(User.USERTYPE_COMPANY);
 		
-		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(true);
+		Mockito.when(usuarioRepository.insert(user)).thenReturn(true);
 		
-		assertEquals(usuarioService.insert(usuario), true);
+		assertEquals(usuarioService.insert(user), true);
 	}
 	
 	@Test
@@ -50,13 +50,12 @@ public class UsuarioTest extends com.maldives.service.Test {
 	    
 	    String senha = "123";
 	    
-	    Usuario usuario = new Usuario();
-		usuario.setDeSenha(senha);
-		usuario.setIdEmpresa(1);
+	    User user = new User();
+		user.setPassword(senha);
 		
-		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(user)).thenReturn(false);
 		
-		usuarioService.insert(usuario);
+		usuarioService.insert(user);
 	}
 	
 	@Test
@@ -65,32 +64,30 @@ public class UsuarioTest extends com.maldives.service.Test {
 		exception.expect(IllegalArgumentException.class);
 	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("usuario.senha.embranco"));
 	    
-	    Usuario usuario = new Usuario();
-		usuario.setDeEmailId("rafael@resultadosvirtuais.com");
-		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
-		usuario.setIdEmpresa(1);
+	    User user = new User();
+		user.setEmailId("rafael@resultadosvirtuais.com");
+		user.setUserType(User.USERTYPE_COMPANY);
 		
-		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(user)).thenReturn(false);
 		
-		usuarioService.insert(usuario);
+		usuarioService.insert(user);
 	}
 	
 	@Test
-	public void registrarUsuarioEmpresaSemIdEmpresaTest() {
+	public void registrarUsuarioEmpresaSemTipoDeUsuario() {
 		
 		exception.expect(IllegalArgumentException.class);
-	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("usuario.id.empresa.embranco"));
+	    exception.expectMessage(PacoteRecurso.getPacoteRecurso().getLabel("usuario.tipo.usuario.embranco"));
 	    
 	    String senha = "123";
 	    
-	    Usuario usuario = new Usuario();
-		usuario.setDeEmailId("rafael@resultadosvirtuais.com");
-		usuario.setDeSenha(senha);
-		usuario.setTpUsuario(Usuario.TPUSUARIO_EMPRESA);
+	    User user = new User();
+		user.setEmailId("rafael@resultadosvirtuais.com");
+		user.setPassword(senha);
 		
-		Mockito.when(usuarioRepository.insert(usuario)).thenReturn(false);
+		Mockito.when(usuarioRepository.insert(user)).thenReturn(false);
 		
-		usuarioService.insert(usuario);
+		usuarioService.insert(user);
 	}
 
 }

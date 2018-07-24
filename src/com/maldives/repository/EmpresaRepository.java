@@ -1,11 +1,11 @@
 package com.maldives.repository;
 
-import com.maldives.model.Empresa;
+import com.maldives.domain.Company;
 
 public interface EmpresaRepository {
 	
-	public boolean insert(Empresa empresa);
+	public boolean insert(Company company);
 	 
-	public Empresa findByEmail(final String email);
+	public Company findByEmail(final String email);
 	
 }

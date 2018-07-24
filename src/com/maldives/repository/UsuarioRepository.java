@@ -1,11 +1,11 @@
 package com.maldives.repository;
 
-import com.maldives.model.Usuario;
+import com.maldives.domain.User;
 
 public interface UsuarioRepository {
 	
-	public boolean insert(Usuario usuario);
+	public boolean insert(User user);
 	
-	public Usuario findByEmail(final String email);
+	public User findByEmail(final String email);
 	
 }

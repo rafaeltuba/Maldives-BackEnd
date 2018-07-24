@@ -11,8 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.maldives.model.Empresa;
-import com.maldives.model.Usuario;
+import com.maldives.domain.Company;
+import com.maldives.domain.User;
 import com.maldives.resources.PacoteRecurso;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,26 +36,26 @@ public class SignUpTest extends com.maldives.service.Test {
 		Boolean flAceiteTermos = true;
 		String senha = "123";
 		
-		Empresa empresa = new Empresa();
-		empresa.setNmEmpresa("Resultados Virtuais");
-		empresa.setCdRamoAtividade(1);
-		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
+		Company company = new Company();
+		company.setCompanyName("Resultados Virtuais");
+		company.setLineBusiness(1);
+		company.setEmail("contato@resultadosvirtuais.com.br");
 		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId(empresa.getDeEmail());
-		usuario.setDeSenha(senha);
+		User user = new User();
+		user.setEmailId(company.getEmail());
+		user.setPassword(senha);
 		
-		Empresa empresaReturn = new Empresa();
-		empresaReturn.setNmEmpresa("Resultados Virtuais");
-		empresaReturn.setCdRamoAtividade(1);
-		empresaReturn.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresaReturn.setIdEmpresa(1);
+		User userReturn = new User();
+		userReturn.setUserId(1);
+		userReturn.setEmailId("contato@resultadosvirtuais.com.br");
+		userReturn.setPassword(senha);
+		userReturn.setUserType(User.USERTYPE_COMPANY);
 		
-		Mockito.when(empresaService.registrarNovaEmpresa(empresa)).thenReturn(true);
-		Mockito.when(usuarioService.insert(usuario)).thenReturn(true);
-		Mockito.when(empresaService.findByEmail(empresa.getDeEmail())).thenReturn(empresaReturn);
+		Mockito.when(empresaService.registrarNovaEmpresa(company)).thenReturn(true);
+		Mockito.when(usuarioService.insert(user)).thenReturn(true);
+		Mockito.when(usuarioService.findByEmail(company.getEmail())).thenReturn(userReturn);
 		
-		assertEquals(signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos), true);
+		assertEquals(signUpService.registrarEmpresa(company, user, flAceiteTermos), true);
 	}
 	
 	@Test
@@ -67,26 +67,26 @@ public class SignUpTest extends com.maldives.service.Test {
 	    Boolean flAceiteTermos = false;
 		String senha = "123";
 		
-		Empresa empresa = new Empresa();
-		empresa.setNmEmpresa("Resultados Virtuais");
-		empresa.setCdRamoAtividade(1);
-		empresa.setDeEmail("contato@resultadosvirtuais.com.br");
+		Company company = new Company();
+		company.setCompanyName("Resultados Virtuais");
+		company.setLineBusiness(1);
+		company.setEmail("contato@resultadosvirtuais.com.br");
 		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId(empresa.getDeEmail());
-		usuario.setDeSenha(senha);
+		User user = new User();
+		user.setEmailId(company.getEmail());
+		user.setPassword(senha);
 		
-		Empresa empresaReturn = new Empresa();
-		empresaReturn.setNmEmpresa("Resultados Virtuais");
-		empresaReturn.setCdRamoAtividade(1);
-		empresaReturn.setDeEmail("contato@resultadosvirtuais.com.br");
-		empresaReturn.setIdEmpresa(1);
+		Company empresaReturn = new Company();
+		empresaReturn.setCompanyName("Resultados Virtuais");
+		empresaReturn.setLineBusiness(1);
+		empresaReturn.setEmail("contato@resultadosvirtuais.com.br");
+		empresaReturn.setCompanyId(1);
 		
-		Mockito.when(empresaService.registrarNovaEmpresa(empresa)).thenReturn(true);
-		Mockito.when(usuarioService.insert(usuario)).thenReturn(true);
-		Mockito.when(empresaService.findByEmail(empresa.getDeEmail())).thenReturn(empresaReturn);
+		Mockito.when(empresaService.registrarNovaEmpresa(company)).thenReturn(true);
+		Mockito.when(usuarioService.insert(user)).thenReturn(true);
+		Mockito.when(empresaService.findByEmail(company.getEmail())).thenReturn(empresaReturn);
 		
-		signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos);
+		signUpService.registrarEmpresa(company, user, flAceiteTermos);
 	    
 	}
 	

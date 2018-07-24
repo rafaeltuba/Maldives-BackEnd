@@ -5,21 +5,21 @@
 
 <mapper namespace="com.maldives.repository.UsuarioRepository">
 
- <resultMap id = "result" type = "com.maldives.model.Usuario">
-   <result property = "idUsuario" column = "IDUSUARIO" javaType="Integer"/>
-   <result property = "deSenha" column = "DESENHA" javaType="String"/>
-   <result property = "idEmpresa" column = "IDEMPRESA" javaType="Integer"/>
-   <result property = "deEmailId" column = "DEMAILID"/>
+ <resultMap id = "result" type = "com.maldives.domain.User">
+   <result property = "userId" column = "USERID" javaType="Integer"/>
+   <result property = "password" column = "PASSWORD" javaType="String"/>
+   <result property = "emailId" column = "EMAILID" javaType="String"/>
+   <result property = "userType" column = "USERTYPE" javaType="Integer"/>
  </resultMap>
 
-  <insert id = "insert" parameterType = "com.maldives.model.Usuario">
-  	  INSERT INTO USUARIO (deSenha, idEmpresa, deEmailId) VALUES (#{deSenha},#{idEmpresa},#{deEmailId});
+  <insert id = "insert" parameterType = "com.maldives.domain.User">
+  	  INSERT INTO USER (password, emailId, userType) VALUES (#{password},#{emailId}, #{userType});
       <!-- selectKey keyProperty = "id" resultType = "int" order = "AFTER">
          select last_insert_id() as id
       </selectKey -->   
    </insert>
    
-   <select id="findByEmail" parameterType="String" resultType="com.maldives.model.Usuario">
-   		SELECT u.idEmpresa, u.deEmailId, u.idUsuario, u.deSenha  from USUARIO u WHERE u.deEmailId = #{deEmailId};
+   <select id="findByEmail" parameterType="String" resultType="com.maldives.domain.User">
+   		SELECT u.userType, u.emailId, u.userId, u.password  from USER u WHERE u.emailId = #{emailId};
    </select>
 </mapper>

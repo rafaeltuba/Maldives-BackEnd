@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.maldives.model.Empresa;
-import com.maldives.model.Usuario;
+import com.maldives.domain.Company;
+import com.maldives.domain.User;
 import com.maldives.resources.PacoteRecurso;
 import com.maldives.service.EmpresaService;
 import com.maldives.service.SignUpService;
@@ -65,30 +65,31 @@ public class ControlServlet extends HttpServlet {
 		String deSenha = (String)request.getParameter("deSenha");
 		Boolean flAceiteTermos = Boolean.parseBoolean(request.getParameter("flAceiteTermos"));
 		
-		Empresa empresa = new Empresa();
-		empresa.setNmEmpresa(nmEmpresa);
-		empresa.setCdRamoAtividade(cdRamoAtividade);
-		empresa.setDeEmail(deEmail);
+		Company company = new Company();
+		company.setCompanyName(nmEmpresa);
+		company.setLineBusiness(cdRamoAtividade);
+		company.setEmail(deEmail);
 		
-		Usuario usuario = new Usuario();
-		usuario.setDeEmailId(empresa.getDeEmail());
-		usuario.setDeSenha(deSenha);
+		User user = new User();
+		user.setEmailId(company.getEmail());
+		user.setPassword(deSenha);
 		
-		signUpService.registrarEmpresa(empresa, usuario, flAceiteTermos);
+		signUpService.registrarEmpresa(company, user, flAceiteTermos);
 		
-		Empresa empresaSalva = empresaService.findByEmail(deEmail);
+		Company savedCompany = empresaService.findByEmail(deEmail);
 		
-		request.setAttribute("idEmpresa", empresaSalva.getIdEmpresa());
-		request.setAttribute("nmEmpresa", empresaSalva.getNmEmpresa());
-		request.setAttribute("deEmail", empresaSalva.getDeEmail());
-		request.setAttribute("cdRamoAtividade", empresa.getCdRamoAtividade());
+		request.setAttribute("idEmpresa", savedCompany.getCompanyId());
+		request.setAttribute("nmEmpresa", savedCompany.getCompanyName());
+		request.setAttribute("deEmail", savedCompany.getEmail());
+		request.setAttribute("cdRamoAtividade", company.getLineBusiness());
+		request.setAttribute("idUsuarioEmpresa", company.getUserId());
 		
-		Usuario usuarioSalvo = usuarioService.findByEmail(deEmail);
+		User savedUser = usuarioService.findByEmail(deEmail);
 		
-		request.setAttribute("idUsuario", usuarioSalvo.getIdUsuario());
-		request.setAttribute("emailId", usuarioSalvo.getDeEmailId());
-		request.setAttribute("deSenha", usuarioSalvo.getDeSenha());
-		request.setAttribute("idEmpresaUsuario", usuario.getIdEmpresa());
+		request.setAttribute("idUsuario", savedUser.getUserId());
+		request.setAttribute("emailId", savedUser.getEmailId());
+		request.setAttribute("deSenha", savedUser.getPassword());
+		request.setAttribute("userType", savedUser.getUserType());
 		
 		request.getRequestDispatcher("/WEB-INF/sucesso.jsp").forward(request, response);
 			

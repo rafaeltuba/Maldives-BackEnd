@@ -5,18 +5,19 @@
 
 <mapper namespace="com.maldives.repository.EmpresaRepository">
 
- <resultMap id = "result" type = "com.maldives.model.Empresa">
-   <result property = "idEmpresa" column = "IDEMPRESA"/>
-   <result property = "nmEmpresa" column = "NMEMPRESA"/>
-   <result property = "deEmail" column = "DEMAIL"/>
-   <result property = "cdRamoAtividade" column = "CDRAMOATIVIDADE"/>
+ <resultMap id = "result" type = "com.maldives.domain.Company">
+   <result property = "companyId" column = "COMPANYID"/>
+   <result property = "companyName" column = "COMPANYNAME"/>
+   <result property = "email" column = "EMAIL"/>
+   <result property = "lineBusiness" column = "LINEBUSINESS"/>
+   <result property = "userId" column = "USERID"/>
  </resultMap>
 
-  <insert id = "insert" parameterType = "com.maldives.model.Empresa">
-  	  INSERT INTO EMPRESA (nmEmpresa, deEmail, cdRamoAtividade) VALUES (#{nmEmpresa},#{deEmail},#{cdRamoAtividade});
-   </insert>
+  <insert id = "insert" parameterType = "com.maldives.domain.Company">
+  	  INSERT INTO COMPANY (companyName, email, lineBusiness, userId) VALUES (#{companyName},#{email},#{lineBusiness}, #{userId});
+  </insert>
    
-   <select id="findByEmail" parameterType="String" resultType="com.maldives.model.Empresa">
-   		SELECT e.idEmpresa, e.deEmail, e.cdRamoAtividade, e.nmEmpresa from EMPRESA e WHERE e.deEmail = #{deEmail};
-   </select>
+  <select id="findByEmail" parameterType="String" resultType="com.maldives.domain.Company">
+      SELECT c.companyId, c.email, c.lineBusiness, c.companyName, c.userId from COMPANY c WHERE c.email = #{email};
+  </select>
 </mapper>
