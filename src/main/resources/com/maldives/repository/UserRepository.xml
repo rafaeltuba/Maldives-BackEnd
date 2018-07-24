@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.maldives.repository.UserRepository">
+
+ <resultMap id = "result" type = "com.maldives.domain.User">
+   <result property = "userId" column = "USERID" javaType="Integer"/>
+   <result property = "password" column = "PASSWORD" javaType="String"/>
+   <result property = "emailId" column = "EMAILID" javaType="String"/>
+   <result property = "userType" column = "USERTYPE" javaType="Integer"/>
+ </resultMap>
+
+  <insert id = "insert" parameterType = "com.maldives.domain.User">
+  	  INSERT INTO USER (password, emailId, userType) VALUES (#{password},#{emailId}, #{userType});
+      <!-- selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+         select last_insert_id() as id
+      </selectKey -->   
+   </insert>
+   
+   <select id="findByEmail" parameterType="String" resultType="com.maldives.domain.User">
+   		SELECT u.userType, u.emailId, u.userId, u.password  from USER u WHERE u.emailId = #{emailId};
+   </select>
+</mapper>
