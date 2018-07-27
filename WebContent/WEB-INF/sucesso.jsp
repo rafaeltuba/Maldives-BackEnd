@@ -37,6 +37,20 @@
    	      	${deEmail}</td>
    	      <td></td>
    	   </tr>
+   	   <tr>
+   	      <td width="350" align="right"><b>ID Usuário:</b></td>
+   	      <td width="300" align="left" id="idEmpresaUsuario">
+   	      	${idUsuarioEmpresa}
+	      </td>
+   	      <td></td>
+   	   </tr>  
+   	   <tr>
+   	      <td width="350" align="right"><b>Tipo usuário:</b></td>
+   	      <td width="300" align="left" id="userType">
+   	      	${userType}
+	      </td>
+   	      <td></td>
+   	   </tr>  
    </table>
    <br>
    <h2>Dados do Usuário</h2>
@@ -62,13 +76,6 @@
 		  </td>
    	      <td></td>
    	   </tr>
-   	  <tr>
-   	      <td width="350" align="right"><b>ID Empresa:</b></td>
-   	      <td width="300" align="left" id="idEmpresaUsuario">
-   	      	${idEmpresaUsuario}
-	      </td>
-   	      <td></td>
-   	   </tr>  
    </table>
    
 </body>
