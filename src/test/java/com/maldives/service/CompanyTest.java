@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.maldives.domain.Company;
 import com.maldives.repository.CompanyRepository;
-import com.maldives.resources.PacoteRecurso;
+import com.maldives.util.PacoteRecurso;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CompanyTest extends com.maldives.service.Test {

@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
+import com.maldives.util.PacoteRecurso;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PacoteRecursosTest extends com.maldives.service.Test {
@@ -37,14 +38,14 @@ public class PacoteRecursosTest extends com.maldives.service.Test {
 	@Test
 	public void c_carregarPacoteRecursos_pt_BR_comSucessoTest() {
 		Locale.setDefault(new Locale(PacoteRecurso.LOCALE_PORTUGUES_BRASIL));
-		assertEquals(PacoteRecurso.getPacoteRecurso().getLabel("empresa.nome.empresa.embranco"), "Nome da empresa est· em branco.");
+		assertEquals(PacoteRecurso.getPacoteRecurso().getLabel("empresa.nome.empresa.embranco"), "Nome da empresa est√° em branco.");
 	}
 	
 	@Test
 	public void d_localeNaoMapeadoNoSistemaTest() {
 		Locale.setDefault(Locale.CANADA);
 		exception.expect(InternalError.class);
-	    exception.expectMessage("Resource Bundle n„o foi identificado para lingua '" + Locale.getDefault().getLanguage()+"_"+Locale.getDefault().getCountry()+"'.");
+	    exception.expectMessage("Resource Bundle n√£o foi identificado para lingua '" + Locale.getDefault().getLanguage()+"_"+Locale.getDefault().getCountry()+"'.");
 	    PacoteRecurso.getPacoteRecurso().getLabel("empresa.nome.empresa.embranco");
 	}
 	

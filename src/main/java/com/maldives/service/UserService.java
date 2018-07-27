@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.maldives.domain.Company;
 import com.maldives.domain.User;
 import com.maldives.repository.UserRepository;
-import com.maldives.resources.PacoteRecurso;
+import com.maldives.util.PacoteRecurso;
 
 @Service
 public class UserService {

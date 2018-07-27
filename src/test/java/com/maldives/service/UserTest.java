@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.maldives.domain.Company;
 import com.maldives.domain.User;
 import com.maldives.repository.UserRepository;
-import com.maldives.resources.PacoteRecurso;
+import com.maldives.util.PacoteRecurso;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserTest extends com.maldives.service.Test {

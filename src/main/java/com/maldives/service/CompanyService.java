@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.maldives.domain.Company;
 import com.maldives.repository.CompanyRepository;
-import com.maldives.resources.PacoteRecurso;
+import com.maldives.util.PacoteRecurso;
 
 @Service
 public class CompanyService {

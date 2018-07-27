@@ -2,7 +2,7 @@ package com.maldives.service;
 
 import java.util.Locale;
 
-import com.maldives.resources.PacoteRecurso;
+import com.maldives.util.PacoteRecurso;
 
 public abstract class Test {
 	

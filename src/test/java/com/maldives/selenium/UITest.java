@@ -27,7 +27,7 @@ public abstract class UITest {
 		return conn;
     }
     
-    public void deleteAllEmpresas() throws SQLException {
+    public void deleteAllCompanies() throws SQLException {
 		
 		Connection connection = getConnection();
 		try {
@@ -40,7 +40,8 @@ public abstract class UITest {
 		}
 	}
     
-    public void deleteAllUsuarios() throws SQLException {
+
+    public void deleteAllUsers() throws SQLException {
 		
 		Connection connection = getConnection();
 		try {
