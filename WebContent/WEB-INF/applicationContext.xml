@@ -8,10 +8,30 @@
 	   		http://www.springframework.org/schema/context
 	   		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- Activates various annotations to be detected in bean classes -->
     <context:annotation-config/>
     
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <context:component-scan base-package="com.maldives"/>
+    
+    <bean id="companyRepository" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="mapperInterface" value="com.maldives.repository.CompanyRepository" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean> 
+    
+    <bean id="userRepository" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="mapperInterface" value="com.maldives.repository.UserRepository" />
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource"/>
+	  <property name="mapperLocations" value="classpath*:com.maldives.repository.mapping/**/*.xml" />
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    <property name="url" value="jdbc:mysql://localhost:3306/maldives?characterEncoding=utf8" />
 	    <property name="username" value="root" />
@@ -21,42 +41,6 @@
 	<!-- bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	    <property name="dataSource" ref="myDataSource"/>
     </bean -->
-
-    <bean id="sqlSessionBean" class="org.mybatis.spring.SqlSessionTemplate">
-  		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
-	</bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-    
-    <bean id="empresaServiceBean" class="com.maldives.service.EmpresaService">
-    	<property name="empresaRepository" ref="empresaRepositoryBean"/>
-    </bean>
-    
-    <bean id="usuarioServiceBean" class="com.maldives.service.UsuarioService">
-    	<property name="usuarioRepository" ref="usuarioRepositoryBean"/>
-    </bean>
-    
-    <bean id="signUpServiceBean" class="com.maldives.service.SignUpService">
-    	<property name="empresaService" ref="empresaServiceBean"/>
-    	<property name="usuarioService" ref="usuarioServiceBean"/>
-    </bean>
-    
-    <bean id="empresaRepositoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    	<property name="mapperInterface" value="com.maldives.repository.EmpresaRepository" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean> 
-    
-    <bean id="usuarioRepositoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    	<property name="mapperInterface" value="com.maldives.repository.UsuarioRepository" />
-    	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>
-    
-    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-	  <property name="dataSource" ref="dataSource"/>
-	  <property name="mapperLocations" value="classpath*:com.maldives.repository.mapping/**/*.xml" />
-	</bean>
 	
 	
 </beans>
