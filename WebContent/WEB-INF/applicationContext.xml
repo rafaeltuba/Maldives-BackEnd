@@ -8,6 +8,8 @@
 	   		http://www.springframework.org/schema/context
 	   		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+    <context:property-placeholder location="classpath:application.properties" />
+
     <context:annotation-config/>
     
     <context:component-scan base-package="com.maldives"/>
@@ -32,10 +34,10 @@
 	</bean>
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url" value="jdbc:mysql://localhost:3306/maldives?characterEncoding=utf8" />
-	    <property name="username" value="root" />
-	    <property name="password" value="#Rafatuba01" />
+	    <property name="driverClassName" value="${database.mysql.driver}" />
+	    <property name="url" value="${database.url}" />
+	    <property name="username" value="${database.username}" />
+	    <property name="password" value="${database.password}" />
 	</bean>
 	
 	<!-- bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
