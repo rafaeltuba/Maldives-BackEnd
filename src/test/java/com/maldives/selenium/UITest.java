@@ -40,6 +40,7 @@ public abstract class UITest {
 		}
 	}
     
+
     public void deleteAllUsers() throws SQLException {
 		
 		Connection connection = getConnection();
